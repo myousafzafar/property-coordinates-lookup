@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config(); //if later on I need to use .env vars here
 
-import express, { json } from "express";
+import express from "express";
 import propertyRoutes from "./routes/propertyRoutes.js";
 
 const app = express();
