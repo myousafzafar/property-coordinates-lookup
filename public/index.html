@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Property Manager</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px auto;
+        max-width: 600px;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      label {
+        display: block;
+        margin: 15px 0 5px;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #view-section {
+        margin-top: 40px;
+        text-align: center;
+      }
+      pre {
+        text-align: left;
+        background: #eee;
+        padding: 15px;
+        margin-top: 20px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Create Property</h2>
+    <form id="propertyForm">
+      <label>Title:</label> 
+      <input name="title" />
+      
+      <label>Price:</label>
+      <input name="price" type="number" />
+      
+      <label>Address (required):</label>
+      <input name="address" required/>
+      
+      <label>Agent Name:</label>
+      <input name="agentName" />
+      
+      <label>Agency:</label>
+      <input name="agency" />
+      
+      <button type="submit">Create Property</button>
+    </form>
+
+    <pre id="create-response" style="display:none;"></pre>
+
+    <div id="view-section">
+      <h2>View All Properties</h2>
+      <button onclick="viewProperties()">Show Properties</button>
+      <pre id="property-list" style="display: none;"></pre>
+    </div>
+
+    <script>
+      const form = document.getElementById("propertyForm");
+      const responseBox = document.getElementById("create-response");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        const res = await fetch("/api/properties", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        responseBox.style.display = "block";
+        responseBox.textContent = JSON.stringify(result, null, 2);
+        form.reset();
+      });
+
+      async function viewProperties() {
+        const res = await fetch("/api/properties");
+        const data = await res.json();
+        const pre = document.getElementById("property-list");
+        pre.style.display = "block";
+        pre.textContent = JSON.stringify(data, null, 2);
+      }
+    </script>
+  </body>
+</html>
