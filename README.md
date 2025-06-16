@@ -72,7 +72,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 - 🏘️ Submit property data through a clean HTML form
 - 📦 Backend stores all properties in memory
-- 🌍 Converts addresses into real geographic coordinates
+- 🌍 Converts addresses into real geographic coordinates via **3rd Party API** call [OpenStreetMap Nominatim API](https://nominatim.org/)
 - 🔍 View all stored properties with the “Show Properties” button
 
 ---
