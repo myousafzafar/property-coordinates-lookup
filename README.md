@@ -7,7 +7,7 @@ A Node.js + Express app to **look up the geographic coordinates** (latitude and 
 ## 💡 What It Does
 
 - 🌐 Accepts property data (title, price, address, agent, agency) in a form
-- 📍 Uses the **address** to query the OpenStreetMap API and retrieve the latitude and longitude
+- 📍 Uses the **address** to query the OpenStreetMap API and retrieve the latitude and longitude of the property
 - 🔁 Displays the response including the original input + fetched location data (latitude and longitude)
 - 🧪 Keeps a record of all submitted properties in JSON format
 
